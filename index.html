@@ -1,465 +1,127 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edusign - Portail web</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
-
-    <!-- Google Tag Manager -->
-    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PJTF8DG"></script><script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-PJTF8DG');
-    </script><!-- End Google Tag Manager -->
-
+    <title>Portail Edusign</title>
     <style>
-        .icon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            height: 80px;
-            width: 80px;
+        /* Réinitialisation des marges par défaut */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Empêche le défilement inutile */
         }
 
-        .logo {
-            width: 300px;
-            margin: 60px auto;
-        }
-
-        .column {
-            text-align: center;
-        }
-
-        .img {
-            max-width: 100%;
-            width: 200px;
-            margin: 10px;
-            object-fit: contain;
-            height: 200px;
-        }
-
-        .is-primary {
-            background-color: #12333E !important;
-            font-weight: bold;
-        }
-
-        .app-footer {
-            text-align: center;
-
-        }
-
-        body {
+        /* Conteneur principal qui divise l'écran en 3 */
+        .main-container {
             display: flex;
-        }
-
-        /* School */
-
-        .box-school {
-            width: 33.33%;
-            height: 100vh;
-            background-image: url(assets/school.jpg);
-            background-position: center;
-            background-size: cover;
-            margin: 0;
-
-            position: relative;
-            cursor: pointer;
-        }
-
-        .box-school:hover {
-            width: 33.33%;
-            height: 100vh;
-        }
-
-        .box-school .inner-school {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            transition: opacity 0.3s;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .box-school .inner-school:hover {}
-
-        .box-school .inner-school img {
-            width: 80%;
-            max-width: 250px;
-            margin-top: 40px;
-        }
-
-        /* Teacher */
-
-        .box-professor {
-            width: 33.33%;
-            height: 100vh;
-            background-image: url(assets/professor.jpg);
-            background-position: center;
-            background-size: cover;
-
-            margin: 0;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .box-professor:hover {
-            width: 33.33%;
-            height: 100vh;
-        }
-
-        .box-professor .inner-professor {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            transition: opacity 0.3s;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .box-professor .inner-professor:hover {}
-
-        .box-professor .inner-professor img {
-            width: 80%;
-            max-width: 250px;
-            margin-top: 40px;
-        }
-
-        /* Student */
-
-        .box-student {
-            width: 33.33%;
-            height: 100vh;
-            background-image: url(assets/student.jpg);
-            background-position: center;
-            background-size: cover;
-
-            margin: 0;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .box-student:hover {
-            width: 33.33%;
-            height: 100vh;
-        }
-
-        .box-student .inner-student {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            transition: opacity 0.3s;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .box-student .inner-student:hover {
-            /*opacity: 0.85;*/
-        }
-
-        .box-student .inner-student img {
-            width: 80%;
-            max-width: 250px;
-            margin-top: 40px;
-        }
-
-
-        /* Utils */
-
-        .display-flex {
-            min-height: 80vh;
-            display: flex;
-        }
-
-        .margin-auto {
-            margin: auto;
-        }
-
-        .main-text {
-            font-size: 2.75vw;
-            color: white;
-            font-weight: bold;
-            text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .arrow {
-            width: 80px !important;
-            margin-top: 40px;
-        }
-
-        .app-footer {
-            position: absolute;
-            bottom: 0;
             width: 100%;
-            background: #12333E;
-            padding: 5px;
+            height: 100vh;
+        }
+
+        /* Style de base pour chaque colonne cliquable */
+        .box-link {
+            width: 33.33%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background-position: center;
+            background-size: cover;
             color: white;
+            text-align: center;
         }
 
-        .app-footer a {
+        /* Effet de survol : assombrit légèrement et zoome un peu */
+        .box-link:hover {
+            filter: brightness(1.1);
+            width: 35%; /* La colonne s'élargit un peu au survol */
+        }
+
+        /* Overlay sombre pour rendre le texte lisible sur l'image */
+        .box-link::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(18, 51, 62, 0.4); /* Couleur Edusign semi-transparente */
+            z-index: 1;
+        }
+
+        /* Force le contenu à passer au-dessus de l'overlay */
+        .box-link > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Images de fond spécifiques (vérifie bien tes noms de fichiers dans GitHub) */
+        .bg-school { background-image: url('assets/school_bg.jpg'); }
+        .bg-professor { background-image: url('assets/professor.jpg'); }
+        .bg-student { background-image: url('assets/student_bg.jpg'); }
+
+        /* Styles des icônes et textes */
+        .img-icon {
+            width: 80px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1); /* Rend les icônes SVG blanches */
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-fake {
+            background-color: #00d1b2; /* Couleur is-primary de Bulma */
             color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
         }
 
-        .hover-bg {
+        /* Logo flottant en haut à gauche */
+        .logo-main {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #12333E;
-            opacity: 0;
-            transition: all .3s;
-        }
-
-        .hover-bg:hover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0.3;
-        }
-
-        @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-            /* Styles pour cette Media Queries */
-
-            body {
-                display: block;
-                background-color: #12333E;
-                height: 100vh;
-            }
-
-            .box-professor {
-                width: 100% !important;
-                height: 28vh !important;
-            }
-
-            .box-professor .inner-professor {
-                opacity: 0.9;
-            }
-
-
-            .box-professor .inner-professor img {
-                display: none;
-                margin-top: 5px;
-            }
-
-            .box-school {
-                width: 100% !important;
-                height: 28vh !important;
-            }
-
-            .box-school .inner-school {
-                opacity: 0.9;
-            }
-
-            .box-school .inner-school img {
-                width: 80%;
-                max-width: 125px;
-                margin-top: 5px;
-            }
-
-
-            .box-school .inner-school img {
-                display: none;
-            }
-
-            .box-student {
-                width: 100% !important;
-                height: 28vh !important;
-            }
-
-            .box-student .inner-student {
-                opacity: 0.9;
-            }
-
-            .box-student .inner-student img {
-                display: none;
-                margin-top: 5px;
-            }
-
-            .display-flex {
-                min-height: 26vh;
-            }
-
-            .main-text {
-                font-size: 20px;
-            }
-
-            .arrow {
-                display: none;
-            }
-        }
-
-        a {
-            color: inherit;
+            top: 30px;
+            left: 30px;
+            width: 150px;
+            z-index: 100;
         }
     </style>
 </head>
-
 <body>
 
-    <div class="box-school" onclick="location.href='school/';">
-        <div class="inner-school">
-            <div class="hover-bg"></div>
-            <img src="assets/logo-white.svg" style="opacity: 0;">
+    <img src="assets/logo.svg" class="logo-main" alt="Logo">
 
-            <div class="display-flex">
-                <div class="margin-auto">
-                    <span class="main-text">
-                        <a href="school/">
-                            <span id="translate_iamadministrator">Je suis <br>administrateur·rice</span>
-                        </a>
-                    </span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="box-professor" onclick="location.href='professor/';">
-        <div class="inner-professor">
-            <div class="hover-bg"></div>
-            <img src="assets/logo-white.svg">
-
-            <div class="display-flex">
-                <div class="margin-auto">
-                    <span class="main-text">
-                        <a href="professor/">
-                            <span id="translate_iamteacher">Je suis <br>intervenant·e</span>
-                        </a>
-                    </span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="box-student" onclick="location.href='student/';">
-        <div class="inner-student">
-            <div class="hover-bg"></div>
-            <img src="assets/logo-white.svg" style="opacity: 0;">
-
-            <div class="display-flex">
-                <div class="margin-auto">
-                    <span class="main-text">
-                        <a href="student/">
-                            <span id="translate_iamstudent">Je suis <br>apprenant·e</span>
-                        </a>
-
-                    </span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--
-    <div style="min-height: 95vh;">
-
-
-        <div style="display: flex;">
-            <img src="assets/logo.svg" class="logo">
-        </div>
-
-        <div class="columns">
-            <div class="column">
-                <a class="" href="/school">
-                    <img src="assets/school.svg" class="img">
-                </a>
-                <br />
-                <a class="button is-primary" href="/school">Accès administration</a>
-            </div>
-            <div class="column">
-                <a class="" href="/professor">
-                    <img src="assets/teacher.svg" class="img">
-                </a>
-                <br />
-                <a class="button is-primary" href="/professor">Accès intervenant</a>
-            </div>
-            <div class="column">
-                <a class="" href="/student">
-                    <img src="assets/student.svg" class="img">
-                </a>
-                <br />
-                <a class="button is-primary" href="/student">Accès apprenant</a>
-            </div>
-        </div>
-
-        <br />
-        <br />
-
-        <div style="text-align: center;">
-            <a href="https://edusign.com" style="font-weight: bold; color: #12333E;">Voir le site web</a>
-
-        </div>
-
-
-    </div>
-    -->
-
-
-
-    <div class="app-footer">
-        <a href="https://www.edusign.com" target="_blank"> <span id="translate_website">Site web</span> </a>
-        &nbsp; - &nbsp;
-        <a href="https://www.edusign.com/mentions-legales/" target="_blank"> <span id="translate_legalnotice">Mentions légales</span>
+    <div class="main-container">
+        
+        <a href="/school" class="box-link bg-school">
+            <img src="assets/school.svg" class="img-icon">
+            <h2>Administration</h2>
+            <span class="btn-fake">Accès administration</span>
         </a>
-        &nbsp; - &nbsp;
-        <a href="https://www.edusign.com/legal/CGU.pdf" target="_blank"> <span id="translate_termsandconditionsofuse">Conditions générales d'utilisation</span> </a>
+
+        <a href="/professor" class="box-link bg-professor">
+            <img src="assets/teacher.svg" class="img-icon">
+            <h2>Intervenant</h2>
+            <span class="btn-fake">Accès intervenant</span>
+        </a>
+
+        <a href="/student" class="box-link bg-student">
+            <img src="assets/student.svg" class="img-icon">
+            <h2>Apprenant</h2>
+            <span class="btn-fake">Accès apprenant</span>
+        </a>
+
     </div>
 
-
-    <script>
-        // p'tite traduction
-
-        var userLang = navigator.language || navigator.userLanguage;
-
-        console.log("lang", userLang);
-        if (userLang === "fr-FR" || userLang === "fr") {
-            changeInnerHTML('translate_iamadministrator', "Je suis <br />administrateur·rice");
-            changeInnerHTML('translate_iamteacher', "Je suis <br />intervenant·e");
-            changeInnerHTML('translate_iamstudent', "Je suis <br />apprenant·e");
-            changeInnerHTML('translate_website', "Site web");
-            changeInnerHTML('translate_legalnotice', "Mentions légales");
-            changeInnerHTML('translate_termsandconditionsofuse', "Conditions générales d'utilisation");
-        } else {
-            changeInnerHTML('translate_iamadministrator', "I'm an administrator");
-            changeInnerHTML('translate_iamteacher', "I'm a professor");
-            changeInnerHTML('translate_iamstudent', "I'm a student");
-            changeInnerHTML('translate_website', "Website");
-            changeInnerHTML('translate_legalnotice', "Legal Notice");
-            changeInnerHTML('translate_termsandconditionsofuse', "Terms and conditions of use");
-        }
-
-        function changeInnerHTML(el, text) {
-            document.getElementById(el).innerHTML = text;
-        }
-    </script>
-
-    <!-- Google Tag Manager (noscript) --><noscript><iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PJTF8DG" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
-
-
-</body></html>
+</body>
+</html>
